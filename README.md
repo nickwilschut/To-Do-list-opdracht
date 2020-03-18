@@ -1,2 +1,1 @@
-# To-Do-list-opdracht
-To Do list opdracht School
+Vergeet niet de config.php voor gebruik aan te passen aan jouw ontwikkel omgeving.
