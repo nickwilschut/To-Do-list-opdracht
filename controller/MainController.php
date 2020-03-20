@@ -5,22 +5,18 @@
     // Call to select function from MainModel.
     function index () {
         $users = getAllUsers();
-        render('main/index', ['users' => $users]);
-    }
-
-    function tasks () {
-        $users = getAllUsers();
-        render('main/tasks', ['tasks' => $tasks]);
+        $tasks = getAllTasks();
+        render('main/index', ['users' => $users, 'tasks' => $tasks]);
     }
 
      // call to create functions MainModel.
     function createTask () {
-        createUsers($_POST);
+        createTasks($_POST);
         render('main/taskCreate');
     }
 
     function storeTask () {
-        $newUsers = createUsers($data);
+        $newTasks = createTasks($data);
         header("Location: index");
     }
 
@@ -32,6 +28,17 @@
 
     function store () {
         $newUsers = createUsers($data);
+        header("Location: index");
+    }
+
+    // Call to update / edit functions MainModel.
+    function editTask ($id) {
+        $getTasks = getTasks($id);
+        render('main/taskUpdate', ['tasks' => $getTasks]);
+    }
+
+    function updateTask () {
+        $updateTasks = updateTasks($data);
         header("Location: index");
     }
 

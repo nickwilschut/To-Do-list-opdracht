@@ -1,3 +1,13 @@
+<div class="row">
+	<div class="col-12 mt-4">
+		<div class="alert alert-primary" role="alert">
+			<div class="row text-primary ml-1">
+				Create / Add
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="card border-primary mb-3">
     <div class="card-header text-primary">Add user</div>
     <div class="card-body text-dark">

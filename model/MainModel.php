@@ -16,6 +16,7 @@ function getAllUsers() {
     return $result;
 };
 
+// Get all tasks
 function getAllTasks() {
     try {
         $conn=openDatabaseConnection();
@@ -50,6 +51,23 @@ function getUsers($id) {
     return $result;
 };
 
+function getTasks($id) {
+    try {
+        $conn=openDatabaseConnection();
+        $stmt = $conn->prepare("SELECT * FROM Tasks WHERE id = :id");
+
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+
+        $result = $stmt->fetch();
+    }
+    catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+    $conn = null;
+    return $result;
+};
+
 // Create function
 function createUsers($data) {
     $table = $_POST['table'];
@@ -66,6 +84,34 @@ function createUsers($data) {
             $query->bindParam(':name', $_POST["name"]);
             $query->bindParam(':username', $_POST["username"]);
             $query->bindParam(':password', $_POST["password"]);
+
+            $query->execute();
+        }
+        catch(PDOException $e){   
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+};
+
+// Create function
+function createTasks($data) {
+    $table = $_POST['table'];
+    $status = 1;
+    $message = Null;
+
+    // Check if all required fields are send trough.
+    if ($_POST["id"] || $_POST["table"] != '') {
+        try {
+            $conn=openDatabaseConnection();
+
+            // Insert Query.
+            $sql = "INSERT INTO $table (Name, description, status_id, duration, List_id) VALUES (:name, :description, :status_id, :duration, :List_id)";
+            $query = $conn->prepare($sql);
+            $query->bindParam(":name", $_POST["name"]);
+            $query->bindParam(":description", $_POST["description"]);
+            $query->bindParam(":status_id", $status);
+            $query->bindParam(":duration", $_POST["duration"]);
+            $query->bindParam(":List_id", $_POST["List_id"]);
 
             $query->execute();
         }
@@ -105,6 +151,35 @@ function updateUsers($data) {
     }
 };
 
+function updateTasks($data) {
+    $table = $_POST['table'];
+    $message = Null;
+    $status = 1;
+    // Check if all required fields are send trough.
+    if ($_POST["id"] || $_POST["table"] != '') {
+        try {
+            $conn=openDatabaseConnection();
+           
+            // Update Query.
+            $sql = "UPDATE $table SET Name=:name, description=:description, status_id=:status_id, duration=:duration, List_id=:List_id WHERE id=:id";
+            $query = $conn->prepare($sql);
+            $query->bindParam(":name", $_POST["name"]);
+            $query->bindParam(":description", $_POST["description"]);
+            $query->bindParam(":status_id", $status);
+            $query->bindParam(":duration", $_POST["duration"]);
+            $query->bindParam(":List_id", $_POST["List_id"]);
+
+            $query->execute();
+        }
+        catch(PDOException $e){
+            echo "Connection failed: " . $e->getMessage();
+        }
+    } else {
+        // Set error message.
+        $message = "Failed to update";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+    }
+};
 // Delete function.
 function deleteUsers($id){
     $table = $_POST['table'];

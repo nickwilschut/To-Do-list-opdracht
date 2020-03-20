@@ -12,15 +12,16 @@
 	<link rel="stylesheet" href="<?= URL ?>/css/style.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-secondary" onload="javascript:changeToTasks()">
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-12 mt-4">
-			<div class="alert alert-primary" role="alert">
-				<div class="row">
-					<a href="<?=URL?>main/index"><i class="fas fa-users ml-2"></i> Users</a>
-					<a href="<?=URL?>main/tasks"><i class="fas fa-tasks ml-5"></i> Tasks</a>
+		<div class="col-12">
+			<div class="row">
+				<div class="col-2 bg-light border-right sidenav">
+					<div class="row">
+						<a href="<?=URL?>main/index" class="text-secondary mx-auto mt-4 h1">To do lists.</a>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+
+				<div class="col-10 main">
+					<!--start page content.-->
