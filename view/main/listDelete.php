@@ -9,11 +9,11 @@
 </div>
 
 <div class="card border-primary mb-3">
-    <div class="card-header text-primary">Delete task</div>
+    <div class="card-header text-primary">Delete list</div>
     <div class="card-body text-dark">
-	    <form name="delete" method="post" action="<?=URL?>main/destroyTask">
-		    <input type="hidden" name="id" value="<?=$tasks["id"]?>"/>
-		    <input type="hidden" name="table" value="Tasks"/>
+	    <form name="delete" method="post" action="<?=URL?>main/destroyList">
+		    <input type="hidden" name="id" value="<?=$lists["id"]?>"/>
+		    <input type="hidden" name="table" value="Lists"/>
 			<div class="row mb-2">
 				<div class="col-12">
 					<p class="card-text">
